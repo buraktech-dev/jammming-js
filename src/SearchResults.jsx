@@ -1,15 +1,20 @@
 import Track from "./Track";
 
-function SearchResults() {
+function SearchResults(props) {
   return (
-    <div className="flex flex-col">
-      <div className="max-w-xs rounded overflow-hidden shadow-lg m-4">
-        <Track />
-      </div>
-
-      <div className="max-w-xs rounded overflow-hidden shadow-lg m-4">
-        <Track />
-      </div>
+    <div className="">
+      <h1 className="mb-5">Results</h1>
+      {props.searchResults.map((song) => {
+        return (
+          <div className="">
+            <Track
+              songName={song.name}
+              albumName={song.album}
+              artist={song.artist}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 }

@@ -2,17 +2,18 @@ import Track from "./Track";
 
 function Playlist() {
   return (
-    <div className="flex flex-col">
-      <div className="max-w-xs rounded overflow-hidden m-4">
+    <div className="">
+      <h1 className="mb-5">New playlist</h1>
+      <div className="mb-5 flex justify-between space-x-2">
         <input
           type="text"
           placeholder="Name your playlist..."
-          className="rounded px-5 py-2.5 top-10 bg-emerald-700 w-full"
+          className="rounded px-5 py-2.5 bg-emerald-700"
         />
-        <button className="w-full">Create</button>
+        <button>Create</button>
       </div>
 
-      <div className="max-w-xs rounded overflow-hidden shadow-lg m-4">
+      <div className="">
         <Track />
       </div>
     </div>
