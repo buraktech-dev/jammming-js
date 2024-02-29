@@ -7,9 +7,22 @@ function Track(props) {
           <li>{props.artist}</li>
           <li>|</li>
           <li>{props.albumName}</li>
+          <li>{props.key}</li>
         </ul>
       </div>
-      <button className="text-l text-right">+</button>
+      <button
+        className="text-l text-right"
+        onClick={() =>
+          props.handleSong({
+            name: props.songName,
+            artist: props.artist,
+            album: props.albumName,
+            id: props.id,
+          })
+        }
+      >
+        +
+      </button>
     </div>
   );
 }

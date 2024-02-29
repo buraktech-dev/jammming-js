@@ -11,6 +11,7 @@ function App() {
   const [artistID, setArtistID] = useState("");
   const [artistName, setArtistName] = useState("");
   const [topSongs, setTopSongs] = useState([]);
+  const [playlist, setPlaylist] = useState([]);
 
   // Fetching the access-token upon launch (token is valid for 1 hour)
   useEffect(() => {
@@ -106,7 +107,7 @@ function App() {
         const artistJsonResponse = await artistResponse.json();
         console.log("SONGS HOLEN");
         for (let i = 0; i < artistJsonResponse.tracks.length; i++) {
-          console.log(artistJsonResponse.tracks[i]);
+          console.log(artistJsonResponse.tracks[i].id);
           setTopSongs((prev) => [
             ...prev,
             {
@@ -126,7 +127,25 @@ function App() {
   };
 
   // Adds songs to playlist
-  const addToPlaylist = (track) => {};
+  const addToPlaylist = (track) => {
+    let inPlaylist = false;
+    for (let i = 0; i < playlist.length; i++) {
+      if (playlist[i].id === track.id) {
+        inPlaylist = true;
+      }
+    }
+    if (!inPlaylist) {
+      setPlaylist((prev) => [...prev, track]);
+    } else {
+      alert("Song already in playlist!");
+    }
+  };
+
+  // Adds songs to playlist
+  const removeFromPlaylist = (track) => {
+    setPlaylist(playlist.filter((song) => track.id !== song.id));
+    console.log(playlist);
+  };
 
   return (
     <div>
@@ -137,10 +156,10 @@ function App() {
       />
       <div className="flex flex-wrap justify-center space-x-10">
         <div>
-          <SearchResults searchResults={topSongs} />
+          <SearchResults searchResults={topSongs} addSong={addToPlaylist} />
         </div>
 
-        <Playlist />
+        <Playlist playlist={playlist} removeSong={removeFromPlaylist} />
       </div>
     </div>
   );

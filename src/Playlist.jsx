@@ -1,6 +1,6 @@
 import Track from "./Track";
 
-function Playlist() {
+function Playlist(props) {
   return (
     <div className="">
       <h1 className="mb-5">New playlist</h1>
@@ -8,14 +8,24 @@ function Playlist() {
         <input
           type="text"
           placeholder="Name your playlist..."
-          className="rounded px-5 py-2.5 bg-emerald-700"
+          className="rounded px-5 py-2.5 bg-emerald-700 w-full"
         />
         <button>Create</button>
       </div>
 
-      <div className="">
-        <Track />
-      </div>
+      {props.playlist.map((song) => {
+        return (
+          <div>
+            <Track
+              songName={song.name}
+              albumName={song.album}
+              artist={song.artist}
+              id={song.id}
+              handleSong={props.removeSong}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 }
