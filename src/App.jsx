@@ -12,6 +12,7 @@ function App() {
   const [artistName, setArtistName] = useState("");
   const [topSongs, setTopSongs] = useState([]);
   const [playlist, setPlaylist] = useState([]);
+  const [playlistName, setplaylistName] = useState("");
 
   // Fetching the access-token upon launch (token is valid for 1 hour)
   useEffect(() => {
@@ -80,6 +81,11 @@ function App() {
     event.preventDefault();
     setArtistName(event.target.value);
     console.log("Current name: " + artistName);
+  };
+
+  const handlePLName = (event) => {
+    event.preventDefault();
+    setplaylistName(event.target.value);
   };
 
   const handleSearch = async () => {
@@ -159,7 +165,12 @@ function App() {
           <SearchResults searchResults={topSongs} addSong={addToPlaylist} />
         </div>
 
-        <Playlist playlist={playlist} removeSong={removeFromPlaylist} />
+        <Playlist
+          playlist={playlist}
+          removeSong={removeFromPlaylist}
+          handlePLName={handlePLName}
+          playlistName={playlistName}
+        />
       </div>
     </div>
   );
